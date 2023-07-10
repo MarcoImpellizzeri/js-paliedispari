@@ -1,17 +1,36 @@
 /**
- * Creo una function per scomporre la parola e scriverla al contrario
+ * Creo una function che controlla se la prima meta` di una parola 
+ * e uguale alla seconda meta`
  * 
  * @param {string} word 
  * @returns 
  */
 function isPalindrome(word) {
-    // Inverti la parola
-    const reversedWord = word.split('').reverse().join('');
+    // trovo la lunghezza della parola
+    const length = word.length;
+    // trovo il valore della lunghezza della parola diviso due
+    const middleIndex = Math.floor(length / 2);
+    // un ciclo for che controlla l'uguaglianta tra i valori degli indici della parola 
+    for (let i = 0; i < middleIndex; i++) {
+        if (word[i].toLowerCase() !== word[length - 1 - i].toLowerCase()) {
+            return false;
+        }
+    }
 
-    // Confronta la parola originale con la sua inversione, senza considerare le differenze tra lettere maiuscole e minuscole
-    return word.toLowerCase() === reversedWord.toLowerCase();
+    return true;
 }
 
-let newWord = document.getElementById("casual-word");
+const form = document.getElementById("my-form");
+const inputWord = document.getElementById("input-word");
+const resultSpan = document.getElementById("result");
+const btnControl = document.getElementById("btn-control");
 
-console.log(isPalindrome(newWord));
+btnControl.addEventListener("click", function () {
+    const wordValue = inputWord.value;
+
+    if (isPalindrome(wordValue)) {
+        resultSpan.textContent = "La parola è palindroma.";
+    } else {
+        resultSpan.textContent = "La parola non è palindroma.";
+    }
+});

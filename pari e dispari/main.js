@@ -7,17 +7,38 @@
     Dichiariamo chi ha vinto.
 */
 
-/**
- * Crea un numero random tra 1 e 5 
- * 
- */
-function numberRandomForPc() {
-    const randomNumber = Math.floor(Math.random() * 5) + 1;
+const btnPlay = document.getElementById("btn-play");
 
-    return randomNumber;
-}
+btnPlay.addEventListener("click", function () {
+    /**
+     * Creo un numero random tra 1 e 5 
+     * 
+     */
+    function numberRandomForPc() {
+        const randomNumber = Math.floor(Math.random() * 5) + 1;
 
-const numberRandomPc = document.getElementById("number-pc");
-const rundomNumber = numberRandomForPc();
+        return randomNumber;
+    }
 
-numberRandomPc.innerHTML = rundomNumber;
+    // print del numero random nello span desiderato
+    const numberRandomPc = document.getElementById("number-pc");
+    const numberPc = numberRandomForPc();
+
+    numberRandomPc.innerHTML = numberPc;
+
+    // print del numero inserito dall'utente nello span desiderato
+    const numberRandomPlayer = document.getElementById("user-number");
+    let numberRandomPlayerValue = numberRandomPlayer.value;
+    const numberPlayer = document.getElementById("number-player");
+
+    numberPlayer.innerHTML = numberRandomPlayerValue;
+
+    // somma del numero dell'utente + numero random
+    const totNumbers = parseInt(numberRandomPlayerValue) + parseInt(numberPc);
+
+    // print del risultato della somma dei due numeri dall'utente nello span desiderato
+    let totNumPlayer = document.getElementById("tot-num-player");
+    totNumPlayer.innerHTML = totNumbers;
+
+    console.log(totNumbers)
+})

@@ -20,6 +20,30 @@ btnPlay.addEventListener("click", function () {
         return randomNumber;
     }
 
+    /**
+     * Creo una funzione che riconosce i numeri pari da quelli dispari
+     * 
+     * @param {number} number
+     * @returns
+     */
+    function isEvenOrOdd(number) {
+        if (number % 2 === 0) {
+            return "pari";
+        } else {
+            return "dispari";
+        }
+    }
+
+    // trovo la costante del vlaore che ha scelto nella select l'utente
+    const selectElement = document.getElementById('my-select');
+    const selectedValue = selectElement.value;
+
+    // un if per verificare che sia stato selezionato uno dei due valori della select
+    if (selectedValue !== 'pari' && selectedValue !== 'dispari') {
+        alert('Seleziona Pari o Dispari!');
+        return;
+    }
+
     // print del numero random nello span desiderato
     const numberRandomPc = document.getElementById("number-pc");
     const numberPc = numberRandomForPc();
@@ -29,6 +53,13 @@ btnPlay.addEventListener("click", function () {
     // print del numero inserito dall'utente nello span desiderato
     const numberRandomPlayer = document.getElementById("user-number");
     let numberRandomPlayerValue = numberRandomPlayer.value;
+
+    // un if per verificare che il numero inserito sia minore di 1 o maggiore di 5
+    if (numberRandomPlayerValue < 1 || numberRandomPlayerValue > 5) {
+        alert('Inserisci un numero compreso tra 1 e 5!');
+        return;
+    }
+
     const numberPlayer = document.getElementById("number-player");
 
     numberPlayer.innerHTML = numberRandomPlayerValue;
@@ -40,5 +71,21 @@ btnPlay.addEventListener("click", function () {
     let totNumPlayer = document.getElementById("tot-num-player");
     totNumPlayer.innerHTML = totNumbers;
 
+    // print della function che dice se il tot dei numeri e pari o dispari
+    const result = document.getElementById("result");
+    result.innerHTML = isEvenOrOdd(totNumbers);
+
+    // costante dello span con id "confirm-victory"
+    const confirmElement = document.getElementById("confirm-victory");
+
+    // condizione if tra la select e il ruslt della function "isEvenOrOdd"
+    if (selectedValue === isEvenOrOdd(totNumbers)) {
+        confirmElement.innerHTML = "Hai vinto!!";
+    } else {
+        confirmElement.innerHTML = "Hai perso!!";
+    }
+
     console.log(totNumbers)
+    console.log(isEvenOrOdd(totNumbers));
+    console.log(selectedValue);
 })
